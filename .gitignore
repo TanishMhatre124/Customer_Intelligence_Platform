@@ -3,10 +3,8 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# Generated pipeline outputs (reproducible via `python main.py`)
+# Generated pipeline outputs
 data/processed/
-models/
-reports/
 
 # Environments
 .venv/

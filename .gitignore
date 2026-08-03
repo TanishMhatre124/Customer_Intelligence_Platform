@@ -1,15 +1,14 @@
-venv/
+# Byte-compiled / cache
 __pycache__/
-.ipynb_checkpoints/
 *.pyc
-*.pyo
+.ipynb_checkpoints/
 
-.env
-
-.vscode/
-
-models/
+# Generated pipeline outputs (reproducible via `python main.py`)
 data/processed/
+models/
+reports/
 
-.DS_Store
-Thumbs.db
+# Environments
+.venv/
+venv/
+.streamlit/

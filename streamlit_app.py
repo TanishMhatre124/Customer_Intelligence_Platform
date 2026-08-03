@@ -251,7 +251,11 @@ def render_chart(fig, height=None):
         font_color="#e6e9f5",
         title_font_size=18,
         margin=dict(t=60, l=10, r=10, b=10),
-        legend=dict(bgcolor="rgba(0,0,0,0)"),
+        legend=dict(
+            bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#f5f6fb", size=13),
+            title=dict(font=dict(color="#f5f6fb")),
+        ),
     )
     fig.update_xaxes(gridcolor="rgba(255,255,255,0.08)")
     fig.update_yaxes(gridcolor="rgba(255,255,255,0.08)")

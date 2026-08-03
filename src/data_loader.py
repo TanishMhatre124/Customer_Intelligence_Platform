@@ -1,54 +1,49 @@
-import os
+"""
+Load raw Olist datasets from data/raw into a dictionary of DataFrames.
+"""
+
 import pandas as pd
 
-# -------------------------------
-# Project Paths
-# -------------------------------
+from src.config import RAW_FILES, raw_path
 
-RAW_DATA_PATH = os.path.join("data", "raw")
 
-# -------------------------------
-# Dataset Files
-# -------------------------------
+def load_raw_datasets(verbose: bool = True) -> dict:
+    """
+    Load every raw dataset listed in config.RAW_FILES.
 
-dataset_files = {
-    "customers": "olist_customers_dataset.csv",
-    "orders": "olist_orders_dataset.csv",
-    "order_items": "olist_order_items_dataset.csv",
-    "payments": "olist_order_payments_dataset.csv",
-    "reviews": "olist_order_reviews_dataset.csv",
-    "products": "olist_products_dataset.csv",
-    "sellers": "olist_sellers_dataset.csv",
-    "geolocation": "olist_geolocation_dataset.csv",
-    "category_translation": "product_category_name_translation.csv",
-}
+    Returns
+    -------
+    dict[str, pd.DataFrame]
+        Mapping of dataset name -> DataFrame.
+    """
+    datasets = {}
 
-# -------------------------------
-# Load Datasets
-# -------------------------------
+    for name in RAW_FILES:
+        file_path = raw_path(name)
+        try:
+            datasets[name] = pd.read_csv(file_path)
+            if verbose:
+                print(f"Loaded {name}: {datasets[name].shape}")
+        except FileNotFoundError:
+            if verbose:
+                print(f"File not found: {file_path}")
 
-datasets = {}
+    return datasets
 
-for name, file_name in dataset_files.items():
-    file_path = os.path.join(RAW_DATA_PATH, file_name)
 
-    try:
-        datasets[name] = pd.read_csv(file_path)
-        print(f"✅ Loaded {name}")
+def dataset_summary(datasets: dict) -> None:
+    """Print a quick shape/columns summary for each loaded dataset."""
+    print("\n" + "=" * 60)
+    print("DATASET SUMMARY")
+    print("=" * 60)
 
-    except FileNotFoundError:
-        print(f"❌ File not found: {file_name}")
+    for name, df in datasets.items():
+        print(f"\n{name.upper()}")
+        print("-" * 40)
+        print(f"Rows    : {df.shape[0]}")
+        print(f"Columns : {df.shape[1]}")
 
-# -------------------------------
-# Dataset Summary
-# -------------------------------
 
-print("\n" + "=" * 60)
-print("DATASET SUMMARY")
-print("=" * 60)
-
-for name, df in datasets.items():
-    print(f"\n{name.upper()}")
-    print("-" * 40)
-    print(f"Rows    : {df.shape[0]}")
-    print(f"Columns : {df.shape[1]}")
+if __name__ == "__main__":
+    data = load_raw_datasets()
+    dataset_summary(data)

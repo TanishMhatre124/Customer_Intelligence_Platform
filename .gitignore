@@ -4,7 +4,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Generated pipeline outputs
-data/processed/
+# data/processed/
 
 # Environments
 .venv/

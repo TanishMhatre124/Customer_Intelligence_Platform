@@ -1,4 +1,4 @@
-# Customer Intelligence & Churn Prediction Platform
+# End-to-End Customer Churn Prediction and Segmentation
 
 An end-to-end customer analytics pipeline built on the
 [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce):
